@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!-- Se actualiza la página index para que contenga nuevas etiquetas meta y demás etiquetas para la semántica del body -->
+<html lang="es">
+    <head>
+        <title>Ejemplos de iframe</title>
+        <meta charset="UTF-8">
+        <meta name="description" content="Página demostrativa del uso de iframes">
+        <meta name="keywords" content="html5, iframe, fidelitas, youtube, maps">
+    </head>
+    <body>
+        <header>
+            <!-- Contenido del encabezado (3 líneas) -->
+        </header>
+        
+        <nav>
+            <!-- Menú de navegación (8 líneas) -->
+        </nav>
+        
+        <aside>
+            <!-- Contenido lateral (4 líneas) -->
+        </aside>
+        
+        <section id="contenido">
+            <h2>Ejemplos de iframe</h2>
+            
+            <article>
+                <header><h3>La página de la Fidelitas</h3></header>
+                <iframe 
+                    src="https://sistemas.ufidelitas.ac.cr/" 
+                    width="700" 
+                    height="400"
+                    title="Sistemas Fidelitas">
+                </iframe>
+                <footer>Escuela de Sistemas de la Fidelitas</footer>
+            </article>
+            
+            <article>
+                <header><h3>Video de Youtube</h3></header>
+                <iframe 
+                    width="600" 
+                    height="280"
+                    src="https://www.youtube.com/embed/MNlXP-Ber7v"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+                <footer>Alguien mostrando html5</footer>
+            </article>
+            
+            <article>
+                <header><h3>Stem Centers</h3></header>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.9805280581698!2d-84.0379415!3d9"
+                    height="450"
+                    style="border:0;" 
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+                <footer>La ubicación del stem center en Google Maps</footer>
+            </article>
+        </section>
+        
+        <footer id="piePagina">
+            Derechos reservados &copy; 2022
+        </footer>
+    </body>
+</html>

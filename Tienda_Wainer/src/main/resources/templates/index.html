@@ -1,0 +1,31 @@
+<!--
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="~{layout/plantilla :: head}">
+        <title>TechShop</title>        
+    </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"/>
+        
+        <footer th:replace="~{layout/plantilla :: footer}"/>          
+    </body>
+</html>
+ -->
+ 
+ 
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head th:replace="~{layout/plantilla :: head}"><title>TechShop</title>  </head>
+    <body>
+        <header th:replace="~{layout/plantilla :: header}"></header>
+        
+        <main class="container mt-4">
+            <h2 class="text-center">[[#{index.nuestrosProductos}]]</h2>
+            <!-- Aquí puede ir un carrusel, listado de productos, etc. -->
+        </main>
+        
+        <footer th:replace="~{layout/plantilla :: footer}"></footer>         
+    </body>
+</html>

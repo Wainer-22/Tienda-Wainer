@@ -23,8 +23,8 @@
         <!-- 2 Fragmento para mostrar la tabla con el listado de productos -->
         <section th:fragment="listadoProductos" id="productos">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-10">
+                <div class="row justify-content-md-center">
+                    <div class="col-md-auto">
                         <div class="card">
                             <div class="card-header">
                                 <h4>[[#{producto.listado}]]</h4>
@@ -46,15 +46,15 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="producto, contador : ${productos}">
-                                            <td class="text-center">[[${contador.count}]]</td>
-                                            <td class="fs-6">[[${producto.descripcion}]]</td>
-                                            <td class="text-end">[[${#numbers.formatDecimal(producto.precio, 1, 'DEFAULT', 2, 'DEFAULT')}]]</td>
-                                            <td class="text-center">[[${producto.existencias}]]</td>
-                                            <td class="text-end">
+                                            <td class="text-center align-middle">[[${contador.count}]]</td>
+                                            <td class="text-center align-middle">[[${producto.descripcion}]]</td>
+                                            <td class="text-center align-middle">[[${#numbers.formatDecimal(producto.precio, 1, 'DEFAULT', 2, 'DEFAULT')}]]</td>
+                                            <td class="text-center align-middle">[[${producto.existencias}]]</td>
+                                            <td class="text-center align-middle">
                                                 [[${#numbers.formatDecimal(producto.precio * producto.existencias, 1, 'DEFAULT', 2, 'DEFAULT')}]]
                                             </td>
-                                            <td class="text-center" th:text="${producto.activo} ? 'Activa' : 'Inactiva'"></td>
-                                            <td>[[${producto.categoria.descripcion}]]</td>
+                                            <td class="text-center align-middle" th:text="${producto.activo} ? 'Activa' : 'Inactiva'"></td>
+                                            <td class="text-center align-middle">[[${producto.categoria.descripcion}]]</td>
                                             <td>
                                                 <a th:href="@{/producto/eliminar/{id}(id=${producto.idProducto})}"
                                                    class="btn btn-danger">
@@ -77,14 +77,36 @@
                         </div>
                     </div>
 
-                    <div class="col-md-2">
+                    <div class="col-md-auto">
                         <div class="card text-center bg-success text-white mb-3">
                             <div class="card-body">
                                 <h3>[[#{producto.total}]]</h3>
                                 <h4 class="fs-2"><i class="fas fa-boxes"></i> [[${totalProductos}]]</h4>
                             </div>
                         </div>
+                        <form method="POST" th:action="@{/producto/queryPrecio}" class="was-validated">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="precioInf">[[#{producto.precio.inferior}]]</label>
+                                        <input type="number" class="form-control" th:value="${precioInf}" th:name="precioInf" required="true"/>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="precioSup">[[#{producto.precio.superior}]]</label>
+                                        <input type="number" class="form-control" th:value="${precioSup}" th:name="precioSup" required="true"/>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-search"></i> [[#{producto.filtrar}]]
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!--<div class="col-md-2">
+                        </div>-->
                     </div>
+
                 </div>
             </div>
         </section>

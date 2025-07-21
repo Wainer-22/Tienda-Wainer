@@ -79,4 +79,21 @@ public class ProductoController {
 
         return "/producto/modifica";
     }
+
+    @PostMapping("/queryPrecio")
+    public String consultaPorPrecio(Model model,
+            @RequestParam(defaultValue = "0") double precioInf,
+            @RequestParam(defaultValue = "999999") double precioSup) {
+        var productos = productoService.getProductosPrecioEntre(precioInf, precioSup);
+        model.addAttribute("productos", productos);
+        model.addAttribute("precioInf", precioInf);
+        model.addAttribute("precioSup", precioSup);
+        model.addAttribute("totalProductos", productos.size());
+
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);
+
+        return "/producto/listado";
+    }
+
 }

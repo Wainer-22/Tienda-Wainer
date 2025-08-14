@@ -14,7 +14,7 @@
  -->
  
  
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns="http://www.w3.org/1999/xhtml">
     <head th:replace="~{layout/plantilla :: head}"><title>TechShop</title>  </head>
@@ -23,9 +23,89 @@
         
         <main class="container mt-4">
             <h2 class="text-center">[[#{index.nuestrosProductos}]]</h2>
-            <!-- Aquí puede ir un carrusel, listado de productos, etc. -->
+            <section th:replace="~{producto/fragmentos :: tarjetasProductos}"></section>
         </main>
         
         <footer th:replace="~{layout/plantilla :: footer}"></footer>         
     </body>
+</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head th:replace="~{layout/plantilla :: head}">
+    <title>TechShop</title>
+    <style>
+        /* Ajustes visuales para las tarjetas */
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.03);
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-title {
+            font-size: 1rem;
+            font-weight: bold;
+            min-height: 48px;
+        }
+        .card-text {
+            font-size: 0.85rem;
+            min-height: 40px;
+        }
+        .btn-outline-primary {
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="~{layout/plantilla :: header}"></header>
+
+<main class="container mt-4">
+    <h2 class="text-center mb-4">[[#{index.nuestrosProductos}]]</h2>
+
+    <!-- Listado de productos -->
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="col" th:each="producto : ${productos}">
+            <div class="card h-100 shadow-sm">
+                <!-- Imagen -->
+                <img th:if="${producto.rutaImagen != null}" 
+                     th:src="@{${producto.rutaImagen}}" 
+                     class="card-img-top" alt="Imagen de [[${producto.descripcion}]]"></img>
+                <img th:if="${producto.rutaImagen == null}" 
+                     src="/img/sin-imagen.png" 
+                     class="card-img-top" alt="Sin imagen"></img>
+
+                <!-- Información -->
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-center" th:text="${producto.descripcion}"></h5>
+                    <p class="card-text small text-muted" 
+                       th:text="${producto.detalle != null ? producto.detalle : 'Detalle no especificado'}"></p>
+                    <h6 class="text-center fw-bold text-success mt-auto">
+                        ₡[[${#numbers.formatDecimal(producto.precio, 1, 'DEFAULT', 2, 'DEFAULT')}]]
+                        <small class="text-muted">([[${producto.existencias}]])</small>
+                    </h6>
+                </div>
+
+                <!-- Botón carrito -->
+                <div class="card-footer text-center">
+                    <a th:href="@{/carrito/agregar/{id}(id=${producto.idProducto})}" 
+                       class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-shopping-cart"></i> Agregar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{layout/plantilla :: footer}"></footer>         
+</body>
 </html>
+
+

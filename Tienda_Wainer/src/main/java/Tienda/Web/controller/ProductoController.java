@@ -22,6 +22,26 @@ public class ProductoController {
     @Autowired
     private CategoriaService categoriaService;
 
+//    @GetMapping("/")
+//    public String inicio(Model model) {
+//        var productos = productoService.getProductos(true); // true = solo activos
+//        model.addAttribute("productos", productos);
+//        return "index";
+//    }
+    @Controller
+    public class InicioController {
+
+        @Autowired
+        private ProductoService productoService;
+
+        @GetMapping({"/", "/index"})
+        public String inicio(Model model) {
+            var productos = productoService.getProductos(true); // true = solo productos activos
+            model.addAttribute("productos", productos);
+            return "index";
+        }
+    }
+
     @GetMapping("/listado")
     private String listado(Model model) {
         var productos = productoService.getProductos(false);
